@@ -1,0 +1,222 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-slideshow-v2" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %} {% if section.settings.sections_layout == "dark" %}background: {{section.settings.sections_bg_color}};{% endif %}">
+  <div class="section-slideshow-v2">
+    <div class="slick-side-h2 js-slideshow-v2">       
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      {% if block.type == "slideshow" %}
+      <div class="item-slide ">
+        <div class="img-slide">
+          <div class="d-none d-md-block">
+            <a href="{{block.settings.url_btn}}" class="d-block"> 
+              <img data-src="{% if block.settings.img_slide != blank %} {{block.settings.img_slide | img_url : 'master'}} {% else %}  //via.placeholder.com/1920x900 {% endif %}" class="lazyload img_desktop img-fluid w-100" alt="_img_slide_">
+            </a>
+          </div>
+          <div class="d-block d-md-none">
+            <a href="{{block.settings.url_btn}}">
+              {% if block.settings.img_slide_mb != blank %}
+              <img data-src="{{block.settings.img_slide_mb | img_url: 'master'}}" class="lazyload img-fluid w-100" alt="_img_slide">
+              {% else %}
+              <img data-src="{{block.settings.img_slide | img_url : 'master'}}" class="lazyload img_desktop img-fluid w-100" alt="_img_slide">
+              {% endif %}
+            </a>
+          </div>
+        </div>
+        <div class="slide-content">
+
+          {% if block.settings.sub_title1 != blank %}
+          <div class="sub-title1 ">
+            <p class="animated" style="color: {{block.settings.color_sub_title1}}">{{block.settings.sub_title1}}</p>
+          </div>
+          {% endif %}
+          {%  if block.settings.title_slide != blank %}
+          <div class="title-slide">
+            <h3 class="animated" style="color: {{block.settings.color_title}}">{{block.settings.title_slide}}</h3>
+          </div>
+          {% endif %}
+          
+          {%  if block.settings.content_slide != blank %}
+          <div class="content-slide">
+            <p class="animated" style="color: {{block.settings.color_content_slide}}">{{block.settings.content_slide}}</p>
+          </div>
+          {% endif %}
+
+          {% if block.settings.btn_slide != blank %}
+          <div class="box-btn">
+            <a href="{{block.settings.url_btn}}" class="button-main1 animated btn-slide-{{ block.id }}">{{block.settings.btn_slide}}</a>
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+<style>
+  {% for block in section.blocks %}
+  {% if block.type == 'slideshow' %}
+  .section-slideshow-v2 .slick-side-h2 .item-slide .box-btn .btn-slide-{{ block.id }} {
+    background : {{block.settings.bg_color_block_button}};
+    color : {{block.settings.color_block_button}};
+  }
+  .section-slideshow-v2 .slick-side-h2 .item-slide  .box-btn .btn-slide-{{ block.id }}:hover {
+    background : {{block.settings.bg_color_hover_button}};
+    color : {{block.settings.color_hover_text}};
+  }
+  {% endif %}
+  {% endfor %}
+</style>
+
+{% schema %}
+{
+  "name": "SLIDESHOW V2",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slideshow",
+      "name": "slideshow",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "img_slide",
+          "label": "Image slideshow for destop",
+          "info": "1920 x 900px recommended"
+        },
+        {
+          "type": "image_picker",
+          "id": "img_slide_mb",
+          "label": "Image slideshow for mobile",
+          "info": "500 x 600px recommended"
+        },
+        {
+          "type": "text",
+          "id": "sub_title1",
+          "label": "Sub Title 1",
+          "default": "SIDEBOARDS<br>COLLECTION"
+        },
+        {
+          "type": "color",
+          "id": "color_sub_title1",
+          "label": "Color",
+          "default": "#000"
+        },
+        {
+          "type": "text",
+          "id": "title_slide",
+          "label": "Title",
+          "default": "Deros Lamp<br>Product"
+        },
+        {
+          "type": "color",
+          "id": "color_title",
+          "label": "Color",
+          "default": "#000"
+        },
+        {
+          "type": "text",
+          "id": "content_slide",
+          "label": "Content",
+		  "default": "From <strong>$30.00</strong>"
+        },
+        {
+          "type": "color",
+          "id": "color_content_slide",
+          "label": "Color",
+          "default": "#000"
+        },
+        {
+          "type": "text",
+          "id": "btn_slide",
+          "label": "Button",
+          "default": "SHOP NOW"
+        },
+    	{
+      	  "type": "header",
+          "content": "Background & color button"
+    	},
+        {
+          "type": "color",
+          "id": "bg_color_block_button",
+          "label": "Background Color button",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "color_block_button",
+          "label": "Color button",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "bg_color_hover_button",
+          "label": "Background Hover Color",
+          "default": "#f7525a "
+        },
+        {
+          "type": "color",
+          "id": "color_hover_text",
+          "label": "Text Hover Color",
+          "default": "#fff"
+        },
+        {
+          "type": "url",
+          "id": "url_btn",
+          "label": "URL Button",
+          "default": "/collections/all"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SLIDESHOW V2",
+      "category": "HOME",
+      "blocks": [
+        {
+          "type": "slideshow",
+          "settings": {
+            "sub_title1": "LIGHTING<br>COLLECTION",
+            "title_slide": "Deros Lamp<br>Product",
+            "btn_slide": "SHOP NOW"
+          }
+        },
+        {
+          "type": "slideshow",
+          "settings": {
+            "sub_title1": "SIDEBOARDS<br>COLLECTION",
+            "title_slide": "Furniture Decor<br>Product",
+            "btn_slide": "SHOP NOW"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

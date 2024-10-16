@@ -1,0 +1,54 @@
+<div class="product-item-grid-v2">
+  <div class="product-inner images">
+    <div class="product-thumb">
+      <a href="/admin/products" class="thumb-link">
+        {{ 'product-1'| placeholder_svg_tag: 'placeholder-svg' }}
+      </a>
+      <div class="second-image"> 
+        <a href="/admin/products" class="thumb-link"> 
+          {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        </a>
+      </div>
+      <div class="group-button"> 
+        <div class="quick-view">
+          <a href="javascript:void(0)" class="engoj_btn_quickview button engoc-btn-quickview" data-id="{{ product.handle }}" data-toggle="tooltip" data-placement="top" data-original-title="{{ settings.pia_quickview_name }}">
+            {% if settings.pia_quickview_svg %}
+            <i class="fsz-unset">{{ settings.pia_quickview_svg }}</i>
+            {% else %}
+            <i class="{{ settings.pia_quickview }}"></i>
+            {% endif %}
+          </a>
+        </div>
+        <div class="add-wishlist">
+          <a>
+          {% if settings.pia_wishlist_svg != blank %}
+            <i class="fsz-unset">{{ settings.pia_wishlist_svg }}</i>
+            {% else %}
+            <i class="{{ settings.pia_wishlist }}"></i>
+            {% endif %}
+          </a>
+        </div>
+        <div class="add-to-cart">
+          <button type="submit" name="add" class="">
+            {% if settings.pia_addcart_svg != blank %}
+            <i class="fsz-unset">{{ settings.pia_addcart_svg }}</i>
+            {% else %}
+            <i class="{{ settings.pia_addcart }}" style="font-size: 22px;"></i>
+            {% endif %}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="cat-list">
+        <a href="/admin/products">Custom Wheels</a>
+      </div>
+      <h3 class="product-name product_title"> 
+        <a href="/admin/products">Example Product</a>
+      </h3> 
+      <span class="price">
+        $150.00 
+      </span>
+    </div>
+  </div>
+</div>

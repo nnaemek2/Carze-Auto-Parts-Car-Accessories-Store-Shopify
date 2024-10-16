@@ -1,0 +1,119 @@
+{% assign product_label_new = false %}
+{% capture _time %}{{settings.product_new_time | times:86400}}{% endcapture %} 
+{% assign time = _time|plus:0 %}
+{% assign now = 'now' | date: '%s'|plus:0 %}
+
+{% capture _value %}{{product.published_at | date: "%s" | plus : time }}{% endcapture %} 
+{% assign value = _value|plus:0 %}
+
+{% if now < value %}
+{% assign product_label_new = true %}
+{% endif %}
+
+{% assign label_popular = false %}
+{% if product.tags contains "hot" %}
+{% assign label_popular = true %}
+{% endif %} 
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %}
+
+<div class="product-item-grid-v2">
+  <div class="product-inner images">
+    <div class="product-thumb">
+      <a class="thumb-link" href="{{ product.url | within: collection }}">
+        <img class="img-fluid" src="{{ product.featured_image.src | img_url: 'master' }}" alt="{{ product.featured_image.alt | escape }}">
+      </a>
+      {% if product.images.size > 1 %}
+      <div class="second-image">
+        <a href="{{ product.url | within: collection }}" class="thumb-link">
+          {% for image in product.images %}
+          {% if forloop.index == 2 %}
+          <img class="img-fluid" src="{{ image.src | img_url: 'master' }}" alt="{{ image.alt | escape }}">
+          {% endif %}
+          {% endfor %}
+        </a>
+      </div>
+      {% endif %}
+      
+      <div class="group-button">
+        <div class="quick-view">
+          <a href="javascript:void(0)" data-id="{{ product.handle }}" class="engoj_btn_quickview button engoc-btn-quickview" data-toggle="tooltip" data-placement="top" title="{{settings.pia_quickview_name}}">
+            {% if settings.pia_quickview_svg %}
+            <i class="fsz-unset">{{ settings.pia_quickview_svg }}</i>
+            {% else %}
+            <i class="{{ settings.pia_quickview }}"></i>
+            {% endif %}
+          </a>
+        </div>
+        <div class="add-wishlist">
+          {% include 'add-wishlist' %} 
+        </div>
+        <div class="add-to-cart">
+          {% if sold_out %}
+          <a href="{{ product.url | within: collection }}" class="inline-block icon-addcart margin_right_10 box-shadow" data-toggle="tooltip" data-placement="top" data-original-title="{{ settings.pia_sold_name }}">
+            {% if settings.pia_sold_svg != blank %}
+            <i class="fsz-unset">{{ settings.pia_sold_svg }}</i>
+            {% else %}
+            <i class="{{ settings.pia_sold }}"></i>
+            {% endif %}
+          </a>
+          {% else %}
+          {% if product.variants.size > 1 %}
+          <a href="{{ product.url | within: collection }}" class="inline-block icon-addcart margin_right_10 box-shadow" data-toggle="tooltip" data-placement="top" data-original-title="{{ settings.pia_selectoption_name }}">
+            {% if settings.pia_selectoption_svg != blank %}
+            <i class="fsz-unset">{{ settings.pia_selectoption_svg }}</i>
+            {% else %}
+            <i class="{{ settings.pia_selectoption }}"></i>
+            {% endif %}
+          </a>
+          {% else %}
+          <form method="post" action="/cart/add" enctype="multipart/form-data" class="inline-block icon-addcart margin_right_10 box-shadow"  data-toggle="tooltip" data-placement="top" data-original-title="{{ settings.pia_addcart_name }}">
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+            <button type="submit" name="add" class="enj-add-to-cart-btn ">
+              {% if settings.pia_addcart_svg != blank %}
+              <i class="fsz-unset">{{ settings.pia_addcart_svg }}</i>
+              {% else %}
+              <i class="{{ settings.pia_addcart }}" style="font-size: 22px;"></i>
+              {% endif %}
+            </button>
+          </form>
+          {% endif %}
+          {% endif %}       
+        </div>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="cat-list">
+        {% for collection in product.collections %}
+        <a href="{{ collection.url }}">{{ collection.title }}</a>{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      </div>
+      
+      <h3 class="product-name product_title"> 
+        <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+      </h3> 
+      
+      <span class="price">
+        {% capture price %}{{ product.price | money }}{% endcapture %}
+        {% if on_sale %}
+          <del>{{ product.compare_at_price | money }}</del> 
+          <ins>{% if product.price_varies %}{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}{% endif %}</ins>
+        {% else %}
+          {% if product.price_varies %}{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}{% endif %}
+        {% endif %}
+      </span>
+      
+      <div class="rating-wapper">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      </div>
+    </div>
+  </div>
+</div>

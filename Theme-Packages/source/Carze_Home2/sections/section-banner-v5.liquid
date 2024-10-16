@@ -1,0 +1,281 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-banner-v5" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-banner-v5 mt-all">
+    <div class="container container-v2">
+      <div class="row row-1">
+        <div class="col-md-6">
+          <div class="banner-item">
+            <div class="banner-img">
+              <a href="{{section.settings.url_banner1}}" class="box-img">
+                {% if section.settings.banner_img1 != blank %}
+                <img data-src="{{section.settings.banner_img1 | img_url : 'master'}}" class="lazyload img-fluid w-100" alt="_img_banner_">
+                {% else %}
+                <img data-src="//via.placeholder.com/860x860" class="lazyload img-fluid w-100" alt="_img_banner_">
+                {% endif %}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="banner-item banner-top">
+            <div class="banner-img">
+              <a href="{{section.settings.url_banner2}}" class="box-img">
+                {% if section.settings.banner_img2 != blank %}
+                <img data-src="{{section.settings.banner_img2 | img_url : 'master'}}" class="lazyload img-fluid w-100" alt="_img_banner_">
+                {% else %}
+                <img data-src="//via.placeholder.com/860x420" class="lazyload img-fluid w-100" alt="_img_banner_">
+                {% endif %}
+              </a>
+            </div>
+            <div class="banner-content">
+              <div class="info">
+                {% if section.settings.sub_title2 != blank %}
+                <h5 class="title-top mb-0" style="color: {{ section.settings.color_subtitle2 }}">
+                  {{section.settings.sub_title2}}
+                </h5>
+                {% endif %}
+                {% if section.settings.title_banner2 != blank %}
+                <h3 class="title-banner">
+                  <a href="{{section.settings.url_banner2}}" style="color: {{ section.settings.color_title2 }}">
+                    {{section.settings.title_banner2}}
+                  </a>
+                </h3>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="row row-2 banner-small">
+            <div class="col-sm-6">  
+              <div class="banner-item">
+                <div class="banner-img">
+                  <a href="{{section.settings.url_banner3}}" class="box-img">
+                  {% if section.settings.banner_img3 != blank %}
+                  <img data-src="{{section.settings.banner_img3 | img_url : 'master'}}" class="lazyload img-fluid w-100" alt="_img_banner_">
+                  {% else %}
+                  <img data-src="//via.placeholder.com/430x420" class="lazyload img-fluid w-100" alt="_img_banner_">
+                  {% endif %}
+                  </a>
+                </div>
+                <div class="banner-content">
+                  <div class="info">
+                    {% if section.settings.sub_title3 != blank %}
+                    <h5 class="title-top mb-0" style="color: {{ section.settings.color_subtitle3 }}">
+                      {{section.settings.sub_title3}}
+                    </h5>
+                    {% endif %}
+                    {% if section.settings.title_banner3 != blank %}
+                    <h3 class="title-banner"">
+                      <a href="{{section.settings.url_banner3}}" style="color: {{ section.settings.color_title3 }}">
+                        {{section.settings.title_banner3}}
+                      </a>
+                    </h3>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">  
+              <div class="banner-item mt-item">
+                <div class="banner-img">
+                  <a href="{{section.settings.url_banner4}}" class="box-img">
+                  {% if section.settings.banner_img4 != blank %}
+                  <img data-src="{{section.settings.banner_img4 | img_url : 'master'}}" class="lazyload img-fluid w-100" alt="_img_banner_">
+                  {% else %}
+                  <img data-src="//via.placeholder.com/430x420" class="lazyload img-fluid w-100" alt="_img_banner_">
+                  {% endif %}
+                  </a>
+                </div>
+                <div class="banner-content">
+                  <div class="info">
+                    {% if section.settings.sub_title4 != blank %}
+                    <h5 class="title-top mb-0" style="color: {{ section.settings.color_subtitle4 }}">
+                      {{section.settings.sub_title4}}
+                    </h5>
+                    {% endif %}
+                    {% if section.settings.title_banner4 != blank %}
+                    <h3 class="title-banner">
+                      <a href="{{section.settings.url_banner4}}" style="color: {{ section.settings.color_title4 }}">
+                        {{section.settings.title_banner4}}
+                      </a>
+                    </h3>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "BANNER V5",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img1",
+      "info": "860 x 860px recommended",
+      "label": "Banner Image"
+    },
+    {
+      "type": "url",
+      "id": "url_banner1",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Banner 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img2",
+      "info": "860 x 425px recommended",
+      "label": "Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "sub_title2",
+      "label": "Sub Title",
+      "default": "NIKE COLLECTION"
+    },
+    {
+      "type": "color",
+      "id": "color_subtitle2",
+      "label": "Color",
+      "default": "#fff"
+    },
+    {
+      "type": "text",
+      "id": "title_banner2",
+      "label": "Title",
+      "default": "Shoes Sale"
+    },
+    {
+      "type": "color",
+      "id": "color_title2",
+      "label": "Color",
+      "default": "#fff"
+    },
+    {
+      "type": "url",
+      "id": "url_banner2",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Banner 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img3",
+      "info": "430 x 430px recommended",
+      "label": "Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "sub_title3",
+      "label": "Sub Title",
+      "default": "FREE SHIPPING"
+    },
+    {
+      "type": "color",
+      "id": "color_subtitle3",
+      "label": "Color",
+      "default": "#fff"
+    },
+    {
+      "type": "text",
+      "id": "title_banner3",
+      "label": "Title",
+      "default": "Backpack"
+    },
+    {
+      "type": "color",
+      "id": "color_title3",
+      "label": "Color",
+      "default": "#fff"
+    },
+    {
+      "type": "url",
+      "id": "url_banner3",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Banner 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img4",
+      "info": "430 x 430px recommended",
+      "label": "Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "sub_title4",
+      "label": "Sub Title",
+      "default": "20% OFF THE ALL ORDER"
+    },
+    {
+      "type": "color",
+      "id": "color_subtitle4",
+      "label": "Color",
+      "default": "#fff"
+    },
+    {
+      "type": "text",
+      "id": "title_banner4",
+      "label": "Title",
+      "default": "Echarpes Foulards"
+    },
+    {
+      "type": "color",
+      "id": "color_title4",
+      "label": "Color",
+      "default": "#fff"
+    },
+    {
+      "type": "url",
+      "id": "url_banner4",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "presets": [
+    {
+      "name": "BANNER V5",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

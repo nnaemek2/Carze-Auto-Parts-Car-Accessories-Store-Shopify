@@ -1,0 +1,147 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-banner-v6" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %} {% if section.settings.sections_layout == "dark" %}background: {{section.settings.sections_bg_color}};{% endif %}">
+  <div class="section-banner-v6 mt-all">
+    <div class="lazyload">
+      <div class="container container-v2">
+        <div class="row js-banner-v6">
+          {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+          {% if block.type == 'banner' %}
+          <div class="col-md-4 col-12">
+            <div class="item">
+              <div class="box-img">
+                <a href="{{block.settings.block_url}}">
+                  {% if block.settings.block_img != blank %}
+                  <img data-src="{{block.settings.block_img|img_url:'master'}}" class="lazyload img-fluid w-100" alt="collection">
+                  {% else %}
+                  <img data-src="https://placehold.it/540x360" class="lazyload img-fluid w-100" alt="collection">
+                  {% endif %}
+                </a>
+              </div>
+              <div class="category-info">
+                {% if block.settings.block_title != blank %}
+                <h3>
+                  <a href="{{block.settings.block_url}}" class="d-block">
+                    {{block.settings.block_title}}
+                  </a>
+                </h3>
+                {% endif %}
+                {% if block.settings.block_content != blank %}
+                <p class="content-box mb-0">{{block.settings.block_content}}</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+          {% endif %} 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+  "name": "BANNER V6",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "block_img",
+          "info": "540 x 360px recommended",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "block_title",
+          "label": "Title",
+          "default": "Little Frogs: 18-36 Months"
+        },
+        {
+          "type": "url",
+          "id": "block_url",
+          "label": "URL collection",
+          "default": "/collections/all"
+        },
+        {
+          "type": "text",
+          "id": "block_content",
+          "label": "Content",
+          "default": "Classes conducted with adults in the water. The little ones start their adventure in the water with the use of games and activities."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BANNER V6",
+      "category": "HOME",
+      "blocks": [
+        {
+          "type": "banner",
+          "settings": {
+            "block_title": "Little Frogs: 18-36 Months",
+            "block_content": "Classes conducted with adults in the water. The little ones start their adventure in the water with the use of games and activities."
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "block_title": "Sea Turtles: 3-4 Years",
+            "block_content": "Classes developing awareness of the aquatic environment. Without the parent's presence in the water."
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "block_title": "Sharks: 4-12 Years",
+            "block_content": "Learning beginner strokes on their backs and fronts. Classes without the participation of adults in the water."
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "block_title": "Pro Swimmers: 5-12 Years",
+            "block_content": "Mastering the technique in four swimming styles: freestyle, backstroke, breaststroke and butterfly. Constantly on the move."
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "block_title": "Introduction to Climbing",
+            "block_content": "Learn the basics of knot tying and belay technique. Designed for people with little or no climbing experience."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

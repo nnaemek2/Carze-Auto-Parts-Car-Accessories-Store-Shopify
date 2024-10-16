@@ -1,0 +1,249 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-collection-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-collection-v1 mt-all">
+    <div class="container container-v2">
+      <div class="heading d-md-flex justify-content-md-between">
+        <div class="heading-inner">
+          {% if section.settings.section_title != blank %}
+          <h3 class="title" style="color:{{ section.settings.color_title }}">
+            <span>{{section.settings.section_title}}</span>
+          </h3>
+          {% endif %}
+          
+          {% if section.settings.section_des != blank %}
+          <p class="desc" style="color:{{ section.settings.color_des }}">
+            {{section.settings.section_des}}
+          </p>
+          {% endif %}
+        </div>
+        
+        <div class="button-inner mt-4 mt-lg-0">
+          {% if section.settings.section_btn_name != blank %}
+          <a class="button" target="_blank" color:{{ section.settings.color_button }}" href="{{section.settings.section_btn_url}}">
+            {{section.settings.section_btn_name}}
+          </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="row js-collection-v1">
+        {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+          {% if block.type == "collection" %}
+        <div class="collection-item col-12">
+          <div class="listing-inner">
+            <div class="listing-thumb">
+              <figure>
+                {% if block.settings.block_img != blank %}
+                <img class="img-responsive" src="{{block.settings.block_img|img_url:'master'}}" alt="Banner">
+                {% else %}
+                {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg-black' }}
+                {% endif %}
+              </figure>
+            
+              <h4 class="cat-name">
+                {% if block.settings.block_title != blank %}
+                <a target=" _blank" href="{{block.settings.block_url}}" tabindex="0">{{block.settings.block_title}}</a>
+                {% endif %}
+              </h4>
+              {% if block.settings.block_btn_name != blank %}
+              <a class="button" target=" _blank" href="{{block.settings.block_url}}" tabindex="0">{{block.settings.block_btn_name}}</a>
+              {% endif %}
+            </div>
+            
+            {% if block.settings.select_menu != blank %}
+            <ul class="listing-list equal-elem">
+              {% for link in linklists[block.settings.select_menu].links %}
+              <li class=""> 
+                <a href="{{ link.url }}" target="_blank" tabindex="0">
+                  <span class="icon">
+                    <span class="fa fa-angle-right"></span>
+                  </span>
+                  {{ link.title }}
+                </a>
+                {% endfor %}
+              </li>
+            </ul>
+            {% else %}
+            <ul class="listing-list equal-elem">
+              <li class=""> 
+                <a href="#" target="_blank" tabindex="0">
+                  <span class="icon">
+                    <span class="fa fa-angle-right"></span>
+                  </span>
+                  Lorem ipsum dolor
+                </a>
+              </li>
+            </ul>
+            {% endif %}
+          </div>
+        </div>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .section-collection-v1 .heading .button {
+    color: {{ section.settings.color_button }};
+    border-color: {{ section.settings.color_button }};
+  }
+</style>
+
+{% schema %}
+{
+  "name": "COLLECTION V1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title",
+      "default": "TOP CATEGORIES"
+    },
+    {
+      "type": "color",
+      "id": "color_title",
+      "label": "Color",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "section_des",
+      "label": "Description",
+      "default": "Enjoy an entirely new level of driving experience superior cars"
+    },
+    {
+      "type": "color",
+      "id": "color_des",
+      "label": "Color",
+      "default": "#838383"
+    },
+    {
+      "type": "text",
+      "id": "section_btn_name",
+      "label": "Button name",
+      "default": "Shop More"
+    },
+    {
+      "type": "color",
+      "id": "color_button",
+      "label": "Color",
+      "default": "#000"
+    },
+    {
+      "type": "url",
+      "id": "section_btn_url",
+      "label": "Button URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "block_img",
+          "label": "Image",
+          "info": "265 x 168px recommended"
+        },
+        {
+          "type": "text",
+          "id": "block_title",
+          "label": "Title",
+          "default": "Lighting"
+        },
+        {
+          "type": "text",
+          "id": "block_btn_name",
+          "label": "Button name",
+          "default": "SHOP NOW"
+        },
+        {
+          "type": "url",
+          "id": "block_url",
+          "label": "Button URL",
+          "default": "/collections/all"
+        },
+        {
+          "type": "link_list",
+          "id": "select_menu",
+          "label": "Select menu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "COLLECTION V1",
+      "category": "HOME",
+      "blocks": [
+        {
+          "type": "collection",
+          "settings": {
+            "block_title": "Lighting"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "block_title": "Repair Parts"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "block_title": "Performance"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "block_title": "Exterior"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "block_title": "Wheels"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "block_title": "Tires"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

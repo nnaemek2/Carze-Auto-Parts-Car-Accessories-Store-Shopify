@@ -1,0 +1,178 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-collection-v2" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %} {% if section.settings.sections_layout == "dark" %}background: {{section.settings.sections_bg_color}};{% endif %}">
+  <div class="section-collection-v2 mt-all">
+    <div class="container container-v2">
+      <div class="row js-collection-v2">
+        {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+        {% if block.type == 'colection' %}
+        <div class="col-12 col-item">
+          <div class="item">
+            <div class="box-img">
+              <a href="{{block.settings.url_collection}}">
+                {% if block.settings.brand_img != blank %}
+                <img data-src="{{block.settings.brand_img | img_url:'master'}}" class="lazyload img-fluid w-100" alt="_img_collection">
+                {% else %}
+                <img data-src="//via.placeholder.com/300x300" class="lazyload img-fluid w-100" alt="_img_collection">
+                {% endif %}
+              </a>
+            </div>
+            <div class="category-info">
+              <div class="box-info">
+                {% if block.settings.title_collection != blank %}
+                <a href="{{block.settings.url_collection}}" class="title-collection">{{block.settings.title_collection}}</a>
+                {% endif %}
+                {% if block.settings.block_content != blank %}
+                <p class="content-box mb-0">{{block.settings.block_content}}</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %} 
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "COLLECTION V2",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "colection",
+      "name": "Item Collection",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand_img",
+          "info": "300 x 300px recommended",
+          "label": "Collection 1"
+        },
+        {
+          "type": "text",
+          "id": "title_collection",
+          "label": "Title Collection",
+          "default": "Whey Protein"
+        },
+        {
+          "type": "url",
+          "id": "url_collection",
+          "label": "URL collection",
+          "default": "/collections/all"
+        },
+        {
+          "type": "text",
+          "id": "block_content",
+          "label": "Content",
+          "default": "6 products"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "COLLECTION V2",
+      "category": "HOME",
+      "blocks": [
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "Headlight",
+            "block_content": "8 products"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "Wheels Tires",
+            "block_content": "6 products"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "Suspension",
+            "block_content": "5 products"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "Car Seats",
+            "block_content": "9 products"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "Brake",
+            "block_content": "6 products"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "Exhaust",
+            "block_content": "20 products"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "Batteries",
+            "block_content": "8 products"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "Engine Oils",
+            "block_content": "13 products"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "Steering Wheel",
+            "block_content": "10 products"
+          }
+        },
+        {
+          "type": "colection",
+          "settings": {
+            "title_collection": "Car Speakers",
+            "block_content": "7 products"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

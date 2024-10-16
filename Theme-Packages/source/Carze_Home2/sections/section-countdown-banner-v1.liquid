@@ -1,0 +1,159 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-countdown-banner-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-countdown-banner-v1 {% if section.settings.enable_mt %}mt-all{% endif %}">
+    <div class="container container-v2">
+      <div class="row">
+        <div class="col-12 col-lg-7">
+          <div class="product-info d-md-flex align-item-center">
+            <div class="product-info-inner">
+              <h3 class="title">
+                <span class="text">{{section.settings.section_title}}</span>
+              </h3> 
+              {% assign product = all_products[section.settings.section_product] %}
+              {% if section.settings.section_product != blank %}
+              <h3 class="product-name product_title"> 
+                <a href="{{product.url}}">{{product.title}}</a>
+              </h3>
+              <span class="price">
+                {% capture price %}{{ product.price | money }}{% endcapture %}
+                {% if on_sale %}
+                <del>{{ product.compare_at_price | money }}</del> 
+                <ins>{% if product.price_varies %}{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}{% endif %}</ins>
+                {% else %}
+                {% if product.price_varies %}{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}{% endif %}
+                {% endif %}
+              </span>
+              {% else %}
+              <h3 class="product-name product_title"> 
+                <a href="/admin/products">Example Product</a>
+              </h3>
+              <span class="price">
+                <del>$96.00</del> 
+                <ins>$69.00</ins>
+              </span>
+              {% endif %}
+            </div>
+            <div class="countdown-content">
+              <div class="time">
+                {% if product.metafields.engo_countdown_prod.countdown_datetime != blank %}
+                <div class="countdown-timer">
+                  <ul class="mb-0" data-countdown="countdown-banner" data-date="{{product.metafields.engo_countdown_prod.countdown_datetime}}">
+                  </ul>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+       <div class="col-12 col-lg-5">
+        <div class="banner mt-3 mt-lg-0">
+          <a href="{{section.settings.url_banner}}" class="d-block">
+            {% if section.settings.img_banner != blank %}
+            <img data-src="{{ section.settings.img_banner | image_url }}" class="lazyload img-fluid w-100" alt="_img_banner_">
+            {% else %}
+            <img data-src="https://via.placeholder.com/570x200" class="lazyload img-fluid w-100" alt="_img_banner_">
+            {% endif %}
+          </a>
+        </div>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .section-countdown-banner-v1 .countdown-timer li {
+    color: {{section.settings.color_countdown}} !important;
+    background: {{section.settings.bg_color_countdown}} !important;
+  }
+  .section-countdown-banner-v1 .countdown-timer li span {
+    color: {{section.settings.color_countdown}} !important;
+  }
+</style>  
+
+{% schema %}
+{
+  "name": "COUNTDOWN BANNER V1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_mt",
+      "label": "Enable Margin Top?",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Product image"
+    },
+    {
+      "type": "product",
+      "id": "section_product",
+      "label": "Select product"
+    },
+    {
+      "type": "header",
+      "content": "Product info"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title",
+      "default": "Deals Of The Day"
+    },
+    {
+      "type": "header",
+      "content": "Setting Time"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_countdown",
+      "label": "Background color time"
+    },
+    {
+      "type": "color",
+      "id": "color_countdown",
+      "label": "Color time"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner",
+      "label": "Banner Image",
+      "info": "464 x 649px recommended"
+    },
+    {
+      "type": "url",
+      "id": "url_banner",
+      "label": "URL Banner",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "presets": [
+    {
+      "name": "COUNTDOWN BANNER V1",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
