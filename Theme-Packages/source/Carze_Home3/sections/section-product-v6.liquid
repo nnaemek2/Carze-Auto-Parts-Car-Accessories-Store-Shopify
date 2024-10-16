@@ -1,0 +1,227 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-product-v6" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-product-v6 mt-all">
+    <div class="container container-v2">
+      <div class="heading text-center d-lg-flex align-items-center justify-content-lg-between">
+        <h2 class="section-title" {% if section.blocks.size == 1%}style="margin: 0 auto"{% endif %}>
+          {% if section.settings.section_title != blank %}
+          <span class="text">{{section.settings.section_title}}</span>
+          {% endif %}
+        </h2>
+        <div class="tab-head">
+          {% if section.blocks.size > 1 %}
+          <ul class="nav nav-tabs title-tab justify-content-center justify-content-lg-end">
+            {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+            {% if block.type == "collection" %}
+            <li>
+              <a href="#spv2_tab_{{section.id}}_{{block.id}}" data-toggle="tab" class="{% if forloop.first %}active{% endif %} ds-prod-1">
+              {{ block.settings.block_title }}
+              </a>
+            </li>
+              
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+      <div class="tab-content">
+        {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+        {% if block.type == "collection" %}
+        
+        {% assign products_limit = block.settings.products_limit %}
+        {% assign col = block.settings.select_collection %}
+        
+        <div id="spv2_tab_{{section.id}}_{{block.id}}" class="tab-pane fade {% if forloop.first %} show active{% endif %}">
+          <div class="row">
+            
+            {% for product in collections[col].products limit: products_limit %} 
+            {% assign mod_for = forloop.index | modulo: 5 %}
+              
+              {% if mod_for == 1 %}
+              <div class="col-12 col-lg-6">
+                <div class="engo-products big-product">
+                  {% include 'product-item-grid-v2' %}
+                </div>
+              </div>
+
+              {% elsif mod_for == 2 %}
+              <div class="col-12 col-lg-6 mt-20">
+                <div class="row my-row">
+                  <div class="col-6">
+                    <div class="engo-products">
+                        {% include 'product-item-grid-v2' %}
+                    </div>
+                  </div>
+              {% if forloop.last %}    
+                </div>
+              </div>
+              {% endif %}
+
+              {% elsif mod_for == 3 or mod_for == 4 %}
+                  <div class="col-6 {% if mod_for == 4%}mt-lg-30{% endif %}">
+                    <div class="engo-products">
+                        {% include 'product-item-grid-v2' %}
+                    </div>
+                  </div>
+                  {% if forloop.last %}    
+                    </div>
+                  </div>
+                  {% endif %}
+
+              {% elsif mod_for == 0 %}
+                  <div class="col-6 mt-lg-30">
+                    <div class="engo-products">
+                        {% include 'product-item-grid-v2' %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            
+            {% else %}
+            <div class="col-12 col-lg-6">
+              <div class="engo-products big-product">
+                {% include 'empty-product-item-grid-v2' %}
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="row my-row">
+                <div class="col-12 col-lg-6 mt-20">
+                  <div class="engo-products">
+                    {% include 'empty-product-item-grid-v2' %}
+                  </div>
+                  </div>
+                <div class="col-12 col-lg-6 mt-20">
+                  <div class="engo-products">
+                    {% include 'empty-product-item-grid-v2' %}
+                  </div>
+                  </div>
+                <div class="col-12 col-lg-6 mt-lg-30">
+                  <div class="engo-products">
+                    {% include 'empty-product-item-grid-v2' %}
+                  </div>
+                  </div>
+                <div class="col-12 col-lg-6 mt-lg-30">
+                  <div class="engo-products">
+                    {% include 'empty-product-item-grid-v2' %}
+                  </div>
+                  </div>
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "PRODUCT V6",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title",
+      "default": "TOP TRENDING"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "text",
+          "id": "block_title",
+          "label": "Title",
+          "default": "CAR PARTS"
+        },
+        {
+          "type": "collection",
+          "id": "select_collection",
+          "label": "Select Collection"
+        },
+        {
+          "type": "range",
+          "id": "products_limit",
+          "label": "Limit products",
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "default": 5
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PRODUCT V6",
+      "category": "HOME",
+      "blocks": [
+        {
+          "type": "collection",
+          "settings": {
+			"block_title": "CAR PARTS"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+			"block_title": "Batteries"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+			"block_title": "Wiper Blades"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+			"block_title": "Accessories"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+			"block_title": "Toys & Tech"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

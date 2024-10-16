@@ -1,0 +1,45 @@
+<div class="product-item">
+  <div class="product-inner">
+    <div class="product-thumb">
+      <a class="thumb-link" href="/admin/products">
+        {% capture current_1 %}{% cycle 1, 2, 3 %}{% endcapture %}
+        {{ 'product-' | append: current_1 | placeholder_svg_tag: 'placeholder-svg' }}
+      </a>
+      <div class="second-image">
+        <a href="/admin/products" class="thumb-link">
+          {% capture current_2 %}{% cycle 4, 5, 6 %}{% endcapture %}
+          {{ 'product-' | append: current_2 | placeholder_svg_tag: 'placeholder-svg' }}
+        </a>
+      </div>
+    </div>
+
+    <div class="product-info">
+      <div class="cat-list">
+        <a href="/admin/products">Fog Lights</a>
+      </div>
+
+      <h3 class="product-name product_title">
+        <a href="/admin/products">
+          Example Product
+        </a>
+      </h3>
+
+      <span class="price">
+        $150.00 
+      </span>
+
+      <div class="add-to-cart">
+        <div class="add-to-cart-wrap" data-toggle="tooltip" data-placement="top" title="Add to cart">
+          <a href="/admin/products">
+            {% if settings.pia_addcart_svg != blank %}
+            <i class="fsz-unset">{{ settings.pia_addcart_svg }}</i>
+            {% else %}
+            <i class="{{ settings.pia_addcart }}" style="font-size: 22px;"></i>
+            {% endif %}
+          </a>
+        </div>            
+      </div>
+
+    </div>
+  </div>
+</div>

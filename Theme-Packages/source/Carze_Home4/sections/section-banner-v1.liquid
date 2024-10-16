@@ -1,0 +1,287 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-banner-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-banner-v1 mt-moile">
+    <div class="container container-v1">
+      <div class="row">        
+        <div class="col-lg-6 col-md-6 ">
+          <div class="box-banner ">
+            <div class="box-img">
+              <a href="{{section.settings.url_banner1}}">
+                {% if section.settings.img_banner1 != blank %}
+                <img src="{{section.settings.img_banner1 | img_url:'master'}}" class="img-fluid" alt="_img">
+                {% else %}
+                <img src="//via.placeholder.com/800x522" class="img-fluid w-100" alt="_img">
+                {% endif %}
+              </a>
+            </div>
+            <div class="info-banner">
+              {% if section.settings.title1 != blank %}
+              <h3 style="color:{{section.settings.color_title1}}" class="title">
+                {{section.settings.title1}}
+              </h3>
+              {% endif %}
+              {% if section.settings.desc1 != blank %}
+              <span style="color:{{section.settings.color_desc1}}" class="desc">
+                {{section.settings.desc1}}
+              </span>
+              {% endif %} 
+              <div class="box-button"> 
+                {% if section.settings.button_1 != blank %}
+                <a href="{{section.settings.url_button1}}" class="button-main1 btn-{{ section.id }}">
+                  {{section.settings.button_1}}
+                </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 mt-3 mt-md-0">
+          <div class="box-banner ">
+            <div class="box-img">
+              <a href="{{section.settings.url_banner2}}">
+                {% if section.settings.img_banner2 != blank %}
+                <img src="{{section.settings.img_banner2 | img_url:'master'}}" class="img-fluid">
+                {% else %}
+                <img src="//via.placeholder.com/800x522" class="img-fluid w-100" alt="">
+                {% endif %}
+              </a>
+            </div>
+            <div class="info-banner">
+              {% if section.settings.title2 != blank %}
+              <h3 style="color:{{section.settings.color_title2}}" class="title">
+                {{section.settings.title2}}
+              </h3>
+              {% endif %}
+              {% if section.settings.desc2 != blank %}
+              <span style="color:{{section.settings.color_desc2}}" class="desc">
+                {{section.settings.desc2}}
+              </span>
+              {% endif %} 
+              <div class="box-button"> 
+                {% if section.settings.button_2 != blank %}
+                <a href="{{section.settings.url_button2}}" class="button-main1 btn-{{ block.id }}">
+                  {{section.settings.button_2}}
+                </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .section-banner-v1 .box-banner .btn-{{ section.id }} {
+    background: {{ section.settings.bg_color_button1 }};
+    color: {{ section.settings.color_button1 }};
+  }
+  .section-banner-v1 .box-banner .btn-{{ section.id }}:hover {
+    background: {{ section.settings.bg_color_button_hover1 }};
+    color: {{ section.settings.color_button_hover1 }};
+  }
+  .section-banner-v1 .box-banner .btn-{{ block.id }} {
+    background: {{ section.settings.bg_color_button2 }};
+    color: {{ section.settings.color_button2 }};
+  }
+  .section-banner-v1 .box-banner .btn-{{ block.id }}:hover {
+    background: {{ section.settings.bg_color_button_hover2 }};
+    color: {{ section.settings.color_button_hover2 }};
+  }
+</style>
+{% schema %}
+{
+  "name": "BANNER V1",
+  "settings": [
+    {
+      "type": "header",
+      "content": "setting banner 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner1",
+      "label": "Image",
+      "info": "690 x 640px recommended"
+    },
+    {
+      "type": "url",
+      "id": "url_banner1",
+      "label": "URL images banner 1",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "title1",
+      "label": "Title banner 1",
+      "default": "Plant Pots"
+    },
+    {
+      "type": "color",
+      "id": "color_title1",
+      "label": "Color title 1",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "desc1",
+      "label": "Description 1",
+      "default": "Only on our store"
+    },
+    {
+      "type": "color",
+      "id": "color_desc1",
+      "label": "Color description 1",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "button_1",
+      "label": "button 1",
+      "default": "Explore all"
+    },
+    {
+      "type": "header",
+      "content": "Background & color button"
+    },
+    {
+      "type": "color",
+      "id": "color_button1",
+      "label": "Color button",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_button1",
+      "label": "Background button",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "color_button_hover1",
+      "label": "Color button hover",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_button_hover1",
+      "label": "Background button hover",
+      "default": "#f8c461"
+    },
+    {
+      "type": "url",
+      "id": "url_button1",
+      "label": "URL button 1",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "setting banner 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner2",
+      "label": "Image",
+      "info": "690 x 640px recommended"
+    },
+    {
+      "type": "url",
+      "id": "url_banner2",
+      "label": "URL images banner 2",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "title2",
+      "label": "Title banner 2",
+      "default": "Ceramic Pots"
+    },
+    {
+      "type": "color",
+      "id": "color_title2",
+      "label": "Color title 2",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "desc2",
+      "label": "Description 2",
+      "default": "New Collection"
+    },
+    {
+      "type": "color",
+      "id": "color_desc2",
+      "label": "Color description 1",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "button_2",
+      "label": "button 2",
+      "default": "Explore all"
+    },
+    {
+      "type": "header",
+      "content": "Background & color button"
+    },
+    {
+      "type": "color",
+      "id": "color_button2",
+      "label": "Color button",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_button2",
+      "label": "Background button",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "color_button_hover2",
+      "label": "Color button hover",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_button_hover2",
+      "label": "Background button hover",
+      "default": "#f8c461"
+    },
+    {
+      "type": "url",
+      "id": "url_button2",
+      "label": "URL button 2",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "presets": [
+    {
+      "name": "BANNER V1",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

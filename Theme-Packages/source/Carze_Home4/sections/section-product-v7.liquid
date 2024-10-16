@@ -1,0 +1,223 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-product-v7" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-product-v7 mt-all">
+    <div class="container container-v2">
+      <div class="heading text-center text-lg-left d-md-flex justify-content-md-between">
+        <div class="heading-inner">
+          {% if section.settings.section_title != blank %}
+          <h3 class="title" style="color:{{ section.settings.color_title }}">
+            <span>{{section.settings.section_title}}</span>
+          </h3>
+          {% endif %}
+          
+            {% if section.settings.section_des != blank %}
+            <p class="desc" style="color:{{ section.settings.color_des }}">
+              {{section.settings.section_des}}
+            </p>
+            {% endif %}
+          </div>
+          
+          <div class="button-inner mt-4 mt-lg-0">
+            {% if section.settings.section_btn_name != blank %}
+            <a class="button" target="_blank" href="{{section.settings.section_btn_url}}">
+              {{section.settings.section_btn_name}}
+            </a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="engo-tab">
+          <div class="tab-head">
+            <ul class="nav nav-tabs title-tab js-productv7-nav" >
+              {% if section.blocks.size > 0 %}
+              {% for block in section.blocks %}
+              {% if block.type == "collection" %}
+              <li class="{% if forloop.first %}active{% endif %}">
+                <a href="#spv7_tab_{{section.id}}_{{block.id}}" data-toggle="tab" class="engoj-bstab-slick">
+                  <figure> 
+                    {% if block.settings.block_img != blank %}
+                    <img src="{{block.settings.block_img|img_url:'master'}}" class="img-fluid mx-auto" alt="image">
+                    {% else %}
+                    <img src="//placehold.it/200x100" class="img-fluid mx-auto" alt="image">
+                    {% endif %}
+                  </figure>
+                </a>
+              </li>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+            </ul>
+          </div>
+          
+          <div class="tab-content">
+            {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+            {% if block.type == "collection" %}
+            
+            {% assign products_limit = block.settings.products_limit %}
+            {% assign col = block.settings.select_collection %}
+            
+            <div id="spv7_tab_{{section.id}}_{{block.id}}" class="tab-pane fade {% if forloop.first %}show active{% endif %}">
+              <div class="product-grid">
+                <div class="row">
+                  {% for product in collections[col].products limit: products_limit %}
+                    <div class="col-12 col-md-6 col-lg-4">
+                      {% include 'product-item-grid-v3' %}
+                    </div>
+                  {% else %}
+                    {% for i in (1..6) %}
+                    <div class="col-12 col-md-6 col-lg-4">
+                      {% include 'empty-product-item-grid-v3' %}
+                    </div>
+                    {% endfor %}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </div> 
+        </div>
+     </div>
+  </div>
+</div>
+
+<style>
+  .section-product-v7 .heading .button {
+    color: {{ section.settings.color_button }};
+    border-color: {{ section.settings.color_button }};
+  }
+</style>
+{% schema %}
+{
+  "name": "PRODUCT V7",
+  "max_blocks": 5,
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title",
+      "default": "SHOP BY BRANDS"
+    },
+    {
+      "type": "color",
+      "id": "color_title",
+      "label": "Color",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "section_des",
+      "label": "Description",
+      "default": "Enjoy an entirely new level of driving experience superior cars"
+    },
+    {
+      "type": "color",
+      "id": "color_des",
+      "label": "Color",
+      "default": "#838383"
+    },
+    {
+      "type": "text",
+      "id": "section_btn_name",
+      "label": "Button name",
+      "default": "Shop More"
+    },
+    {
+      "type": "color",
+      "id": "color_button",
+      "label": "Color",
+      "default": "#000"
+    },
+    {
+      "type": "url",
+      "id": "section_btn_url",
+      "label": "Button URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "block_img",
+          "label": "Image",
+          "info": "200 x 100px recommended"
+        },
+        {
+          "type": "collection",
+          "id": "select_collection",
+          "label": "Select Collection"
+        },
+        {
+          "type": "range",
+          "id": "products_limit",
+          "label": "Limit products",
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "default": 4
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PRODUCT V7",
+      "category": "HOME",
+      "blocks": [
+        {
+          "type": "collection",
+          "settings": {
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
